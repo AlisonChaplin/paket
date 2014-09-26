@@ -159,33 +159,25 @@ c=========================================================
       DIMENSION A[reference](IDIM1,N), B[reference](IDIM1,M),
      *V[allocatable](:)
       DATA CONST/0.90949470242E-15/
-      allocate(v(n),stat=ierr)
-      write(4,*)' cmlin163 '  
+      allocate(v(n),stat=ierr) 
  1100 NMINUS=N-1
       DSCALE = (MODE.GE.2)
       NOTINV = (MODE.EQ.0).OR.(MODE.EQ.2)
-      PTEST = (4.0*CONST*dFLOAT(N))**2
-      write(4,*)' cmlin168 '  	  
+      PTEST = (4.0*CONST*dFLOAT(N))**2  	  
       IF((N.LT.1).OR.(M.LT.0).OR.(MODE.LT.0).OR.(MODE.GT.3)) GO TO 5100
- 1200 IF(N.NE.1) GO TO 1300
-      write(4,*)' cmlin171 '  
+ 1200 IF(N.NE.1) GO TO 1300  
       DET=A(1,1)
       IF(dABS(dREAL(DET))+dABS(dIMAG(DET)) .EQ. 0. ) GO TO 5201
-      A(1,1) = (1.0,0.0)/A(1,1)
-      write(4,*)' cmlin175 '  
+      A(1,1) = (1.0,0.0)/A(1,1)  
       IF(M.EQ.0) go to 6002
  1210 DO 1219 K=1,M
       B(1,K)=A(1,1)*B(1,K)
- 1219 CONTINUE
-      write(4,*)' cmlin180 '  
+ 1219 CONTINUE  
       go to 6002
  1300 DO 1309 I=1,N
       SUM=0.
  1310 DO 1319 J=1,N
-      SUM = SUM +dREAL(A(I,J))**2 + dIMAG(A(I,J))**2
-      write(4,30) SUM
-   30 format(2x,'Sum=', e12.5)	  
-      write(4,*)' cmlin186 '
+      SUM = SUM +dREAL(A(I,J))**2 + dIMAG(A(I,J))**2	  
  1319 CONTINUE
       if (sum.eq.0) then
       write (4,*) '---------SUM=0!!!!--------'
@@ -196,12 +188,10 @@ c=========================================================
       endif	  
       endif
       if (sum.eq.0) SUM=0.001
-      V(I)=1./SUM
-      write(4,*)' cmlin190 '	  
+      V(I)=1./SUM	  
  1309 CONTINUE
       write(4,6007) v(1),v(2),v(3),v(4)
  6007 format(2x,'v(i): ',e12.5,1x,e12.5,1x,e12.5,1x,e12.5)
-      write(4,*)' cmlin192 ' 
  2000 DET=1.0
  2010 DO 2019 K=1,N
       KPLUS=K+1
@@ -214,8 +204,7 @@ c=========================================================
       PSQ = V(I)*(dREAL(CTEMP)**2 + dIMAG(CTEMP)**2 )
       IF(PSQ.LE.PSQMAX) GO TO 2029
       PSQMAX=PSQ
-      L=I
-      write(4,*)' cmlin201 ' 	  
+      L=I 	  
  2029 CONTINUE
       VTEMP=V(K)
       IF(L.EQ.K) GO TO 2011
@@ -228,7 +217,6 @@ c=========================================================
       V(L)=V(K)
       DET=-DET
  2011 DET = A(K,K)*DET
-       write(4,*)' cmlin214 ' 
 c      write(4,6006) k,a(k,k)
 c 6006 format(2x,'Ведущий злемент ',i5,' столбца ',e12.5,1x,e12.5)
       IF(DSCALE) DET=dSQRT(VTEMP)*DET
@@ -248,8 +236,7 @@ c 6006 format(2x,'Ведущий злемент ',i5,' столбца ',e12.5,1x,e12.5)
  3110 DO 3119 K=1,M
       CTEMP=B(I,K)
       B(I,K)=B(IROW,K)
-      B(IROW,K)=CTEMP
-      write(4,*)' cmlin235 ' 	  
+      B(IROW,K)=CTEMP	  
  3119 CONTINUE
  3109 CONTINUE
  3200 DO 3209 K=1,M
