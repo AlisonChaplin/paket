@@ -41,7 +41,8 @@ c февраль 1996 г.
      *U(4),VC(4),xpm[reference](1)
       EXTERNAL FCY
       allocate(c(m,m),stat=ier)
-   3   if(ier.ne.0) go to 8
+      KOR=0
+  3   if(ier.ne.0) go to 8
       DO 17 I=1,4
   17  IZN(I)=0
       ITER=0
@@ -176,8 +177,15 @@ C     BЫЧИCЛEHHЫЙ ПO HЬЮTOHУ ШAГ ДEЛИTCЯ ПOПОЛAM 5 PAЗ
       hpc=prmt(33)
 c     корректировка
       xpm(ipc)=xpm(ipc)+hpc/5.0
+      KOR=KOR+1
       write(*,'(a)') '++++++++++++'
-      write(3,'(a)') '++++++++++++'	  
+      write(3,'(a)') '++++++++++++'
+      write(7,16) KOR, xpm(ipc) 
+  16  FORMAT(3x, 'KOR=',i3, 3x, 'xpm(ip)=',F14.7, )
+      if (KOR.EQ.30) then
+      write(7,'(a)') 'KOR=30'
+      STOP
+      endif	  
       go to 3
    2  if(ipp.eq.1) write(4,14)xpm(ix1),xpm(ix2),ANEV
       if(ipri.eq.10) WRITE(*,14) xpm(ix1),xpm(ix2),ANEV
