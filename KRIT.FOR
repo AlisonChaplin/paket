@@ -182,8 +182,8 @@ c     корректировка
       write(3,'(a)') '++++++++++++'
       write(7,16) KOR, xpm(ipc) 
   16  FORMAT(3x, 'KOR=',i3, 3x, 'xpm(ip)=',F14.7, )
-      if (KOR.EQ.30) then
-      write(7,'(a)') 'KOR=30'
+      if (KOR.EQ.20) then
+      write(7,'(a)') 'KOR=20'
       STOP
       endif	  
       go to 3
