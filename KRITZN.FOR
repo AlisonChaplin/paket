@@ -83,19 +83,7 @@ c  30  format(3x,'Введите их по порядку (их',i3,' штук)')
       open(3,access="append",file=fname2)
       open(7,access="append",file=fname4)	  
       CALL frn1(xpm,prmt,ck,n,ky,kp,1)
-      call pechpar(xpm,kp,1,0)
-      write(3,32) xpm(3),xpm(4),xpm(5)
-   32 format('[',e12.5,', ',e12.5,', 'e12.5,'],')
-      if(prmt(4).ne.0) then
-      if(lz.eq.0) prmt(14)=1.0
-      if(lz.eq.2) prmt(14)=3.0
-      CALL frn1(xpm,prmt,ck,n,ky,kp,1)
-      prmt(14)=lz
-      endif
-      write(6,3)
-      if(ipri.eq.10) write(*,3)
-   3  format(63('-'))
-  20  format('у массива ',i2,'  элементов')
+	  
 c	  alison
       if((xpm(3).lt.0).or.(xpm(4).lt.0).or.(xpm(5).lt.0)) then
       write(3,2)
@@ -107,6 +95,21 @@ c	  alison
   11  format('ошибка! критические числа стали слишком большими')
       STOP
       endif	  
+	  
+      call pechpar(xpm,kp,1,0)
+      write(3,32) (xpm(i), i=3,8)
+   32 format('[',f7.5,', ',f7.4,', ',f7.2,', ',f7.3,', ',f9.4,', ',f7.5,
+     *'],')
+      if(prmt(4).ne.0) then
+      if(lz.eq.0) prmt(14)=1.0
+      if(lz.eq.2) prmt(14)=3.0
+      CALL frn1(xpm,prmt,ck,n,ky,kp,1)
+      prmt(14)=lz
+      endif
+      write(6,3)
+      if(ipri.eq.10) write(*,3)
+   3  format(63('-'))
+  20  format('у массива ',i2,'  элементов')
 	  
 	  xpm(ip)=xpm(ip)+hp
       close(6)
