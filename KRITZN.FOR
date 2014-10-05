@@ -117,7 +117,7 @@ c	  alison
       write(6,3)
       if(ipri.eq.10) write(*,3)
    3  format(63('-'))
-  20  format('у массива ',i2,'  элементов')
+  20  format('у массива ',i3,'  элементов')
 	  
 	  xpm(ip)=xpm(ip)+hp
       close(6)
