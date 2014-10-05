@@ -178,12 +178,13 @@ C     BЫЧИCЛEHHЫЙ ПO HЬЮTOHУ ШAГ ДEЛИTCЯ ПOПОЛAM 5 PAЗ
 c     корректировка
       xpm(ipc)=xpm(ipc)+hpc/5.0
       KOR=KOR+1
-      write(*,16) KOR, xpm(ipc)
-      write(3,16) KOR, xpm(ipc)
-      write(7,16) KOR, xpm(ipc) 
-  16  FORMAT(3x,'+++++++++++++' 'KOR=',i3, 3x, 'xpm(ip)=',F14.7, )
+      write(*,16) KOR, ipc, xpm(ipc)
+      write(3,16) KOR, ipc, xpm(ipc)
+c      write(7,16) KOR, xpm(ipc) 
+  16  FORMAT(3x,'++++++++++++    KOR =',i3, 3x, 'xpm(', i1,')=',F8.4)
       if (KOR.EQ.20) then
-      write(7,'(a)') 'KOR=20'
+c      write(7,'(a)') 'KOR=20'
+      write(3,'(a)') 'KOR=20'
       STOP
       endif	  
       go to 3

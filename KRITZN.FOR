@@ -8,7 +8,7 @@ c Исправляла 9.12.98
       IMPLICIT REAL*8(A-B,D-H,O-Z),COMPLEX*16(C)
       DIMENSION PRMT(33),XPM[ALLOCATABLE](:),ck[ALLOCATABLE](:)
       dimension ig[ALLOCATABLE](:)
-      character*12 fname,fname1,fname2,fname4
+      character*12 fname,fname1,fname2,fname4,fname5
       ALLOCATE(XPM(KP+1),STAT=IER)
       ALLOCATE(ck(ky),STAT=IER)
       ALLOCATE(ig(kp),STAT=IER)
@@ -42,8 +42,11 @@ c new
   76  format(3x,'Имя файла для построения графиков:',a)
       open(3,access="append",file=fname2)
 	  
-      fname4='test.txt'
-      open(7,access="append",file=fname4)	  
+c      fname4='test.txt'
+c      open(7,access="append",file=fname4)	 
+
+      fname5='clgr.txt'
+      open(8,access="append",file=fname5) 
 
       iip=0
       PRMT(30)=ipp
@@ -81,7 +84,8 @@ c  30  format(3x,'Введите их по порядку (их',i3,' штук)')
       open(6,access="append",file=fname)
       open(4,access="append",file=fname1)
       open(3,access="append",file=fname2)
-      open(7,access="append",file=fname4)	  
+c      open(7,access="append",file=fname4)
+      open(8,access="append",file=fname5)	  
       CALL frn1(xpm,prmt,ck,n,ky,kp,1)
 	  
 c	  alison
@@ -100,6 +104,10 @@ c	  alison
       write(3,32) (xpm(i), i=3,8)
    32 format('[',f7.5,', ',f7.4,', ',f7.2,', ',f7.3,', ',f9.4,', ',f7.5,
      *'],')
+
+      write(8,12) (xpm(i), i=3,5)
+   12 format('[',f7.5,', ',f7.4,', ',f7.2,'],')
+	 
       if(prmt(4).ne.0) then
       if(lz.eq.0) prmt(14)=1.0
       if(lz.eq.2) prmt(14)=3.0
@@ -115,7 +123,8 @@ c	  alison
       close(6)
       close(4)
       close(3)
-      close(7)	  
+c      close(7)
+      close(8)	  
    4  continue
       open(3,access="append",file=fname2)
       write(3,20) np
@@ -125,7 +134,8 @@ c	  alison
       close(6)
       close(3)
       close(4)
-      close(7)	  
+c      close(7)
+      close(8)	  
  10   STOP
    5  write(6,6) ier
    6  format(3x,'kritzn ошибка размещения массивов xpm или ck ier=',i6)
