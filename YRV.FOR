@@ -6,7 +6,7 @@ c Также организуется цикл по одному из параметров
 c Исправляла 1.06.2000
       SUBROUTINE yrv(n,ky,kp,prmt,kkoef,kobr,imax,kkyrv,kof,ipt)
       IMPLICIT REAL*8(A-B,D-H,O-Z),COMPLEX*16(C)
-      DIMENSION prmt(32),ipar(5),infkf[ALLOCATABLE](:,:),
+      DIMENSION prmt(33),ipar(5),infkf[ALLOCATABLE](:,:),
      *cr[ALLOCATABLE](:),is[allocatable](:,:),kof(1),
      *xpn[ALLOCATABLE](:),XPM[ALLOCATABLE](:),cc[ALLOCATABLE](:),
      *ca[ALLOCATABLE](:),infor[ALLOCATABLE](:,:,:),ig[ALLOCATABLE](:)
@@ -135,6 +135,8 @@ c  PRMT(19)=n1
       PRMT(24)=kv
 c      PRMT(18)=h1
       PRMT(8)=igr
+      prmt(32)=ip
+      prmt(33)=hp
       ipech=prmt(4)
       WRITE(6,9) prmt(3)
       call pechpar(xpm,kp,1,0)
@@ -148,7 +150,7 @@ c      PRMT(18)=h1
       WRITE(*,3)
       endif
    9  FORMAT(3X,'Точность расчета eps=',e12.5,'. ПАРAМЕТРЫ: ')
-   3  FORMAT(63('='))
+   3  FORMAT(72('='))
    8  format(3X,'COБCT. ЗHAЧ. OБЬЯBЛEHЫ XP(',i3,') И XP(',i3,')')
       if(igr.eq.1) then
       write(3,29) prmt(3)
@@ -262,6 +264,7 @@ c заполнять эти ячейки обязательно
       close(8)
 *  15  format(5x,'Если надо прекратить счет введите 1')
 *      read *,ii
+      write(*,3)
       ii=0      
 	  if(ii.eq.1) then
       if(igr.eq.1) then
