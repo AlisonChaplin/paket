@@ -246,12 +246,13 @@ c заполнять эти ячейки обязательно
       enddo
       call analise(kkoef,cal,ca,nkoef)
       WRITE(6,3)
-      write(*,15)
+*      write(*,15)
       close(6)
       close(4)
-  15  format(5x,'Если надо прекратить счет введите 1')
-      read *,ii
-      if(ii.eq.1) then
+*  15  format(5x,'Если надо прекратить счет введите 1')
+*      read *,ii
+      ii=0      
+	  if(ii.eq.1) then
       if(igr.eq.1) then
       open(3,access="append",file=fname2)
       write(3,20) k
