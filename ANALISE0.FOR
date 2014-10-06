@@ -60,11 +60,13 @@ c==============================================================
       endif
       if(r.lt.0) then
       if((r1.lt.0).and.(r2.gt.0).and.(r3.gt.0).and.(r0.gt.0)) then 
-      write(6,3) 
+      write(6,3)
+      write(8,3) 	  
       write(*,3) 
    3  format(3x,'Этот режим устойчив. ')
       else
       write(6,4) 
+      write(8,4) 
       write(*,4) 
    4  format(3x,'Этот режим неустойчив. ')
       endif
