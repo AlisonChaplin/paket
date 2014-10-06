@@ -10,7 +10,7 @@ c Исправляла 1.06.2000
      *cr[ALLOCATABLE](:),is[allocatable](:,:),kof(1),
      *xpn[ALLOCATABLE](:),XPM[ALLOCATABLE](:),cc[ALLOCATABLE](:),
      *ca[ALLOCATABLE](:),infor[ALLOCATABLE](:,:,:),ig[ALLOCATABLE](:)
-      character*12 fname,fname1,fname2,fname3
+      character*12 fname,fname1,fname2,fname3,fname5
       ALLOCATE(xpm(KP+1),STAT=IER)
       ALLOCATE(xpn(KP+1),STAT=IER)
       ALLOCATE(ca(kkoef),STAT=IER)
@@ -68,11 +68,13 @@ c      read *,ippm
       endif
       close(5)
       ipri=prmt(23)
+
 c      write(*,'(a)') '  Ввeдите имя файла результатов:'
 c      read(*,'(a)') fname
       fname='rez1.txt'
       write(*,'(a)') '  Имя файла результатов: rez1.txt'	  
       open(6,access="append",file=fname)
+ 
       if(ipri.ne.10) then
 c если нет печати на экран
       write(6,*) 'Промежуточныe результаты будут храниться в файле 
@@ -117,6 +119,10 @@ c      read(*,'(a)') fname3
      * коэфф. ур-ний разветвления от параметров: grkoef1.txt'
       open(7,access="append",file=fname3)
       endif
+	  
+      fname5='rez1cl.txt'
+      open(8,access="append",file=fname5)  
+	  
       kv=4
       PRMT(30)=ipp
       PRMT(13)=IT
@@ -134,6 +140,7 @@ c      PRMT(18)=h1
       call pechpar(xpm,kp,1,0)
       WRITE(6,8) IX1,IX2
       WRITE(6,3) 
+      WRITE(8,3)
       if(ipri.eq.10) then
       WRITE(*,9) prmt(3)
       call pechpar(xpm,kp,1,1)
@@ -162,6 +169,7 @@ c      read *,(ig(k),k=1,kk)
       do 4 k=1,np
       open(6,access="append",file=fname)
       open(4,access="append",file=fname1)
+      open(8,access="append",file=fname5)
       if(igr.eq.1)  open(3,access="append",file=fname2)
       if(igr1.eq.1)  open(7,access="append",file=fname3)
       if(ipt.eq.0) then
@@ -239,6 +247,7 @@ c заполнять эти ячейки обязательно
       if(ipri.eq.10) write(*,1) i,ca(i)
       write(6,1) i,ca(i)
       if(igr1.eq.1) write(7,1) i,ca(i)
+      write(8,1) i,ca(i)
       enddo
       if(igr1.eq.1) write(7,3)
    1  format(5x,i2,'  коэффициент =',e12.5,'+i(',e12.5,')')
@@ -246,9 +255,11 @@ c заполнять эти ячейки обязательно
       enddo
       call analise(kkoef,cal,ca,nkoef)
       WRITE(6,3)
+      WRITE(8,3)
 *      write(*,15)
       close(6)
       close(4)
+      close(8)
 *  15  format(5x,'Если надо прекратить счет введите 1')
 *      read *,ii
       ii=0      
@@ -256,9 +267,10 @@ c заполнять эти ячейки обязательно
       if(igr.eq.1) then
       open(3,access="append",file=fname2)
       write(3,20) k
-  20  format('у массива ',i2,'  элементов')
+  20  format('у массива ',i3,'  элементов')
       close(3)
       close(7)
+      close(8)
       endif 
       stop
       endif

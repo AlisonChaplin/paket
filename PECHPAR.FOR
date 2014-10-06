@@ -4,15 +4,16 @@
 c ip1=0- печать в файл результатов, ip1=1-печать на экране
 c ip=1- печать в файл промежуточных результатов
       if(ip1.eq.0) then
-      WRITE(6,1) (XPM(i),i=2,kp)
-  1   FORMAT(3X,' alfa=',e12.5,' betta=',e12.5,' om=',e12.5/ ' Gr='
-     * ,e12.5,3x,' Pr=',e12.5,3x,' Prd=',e12.5,3x,' epsilon=',e15.8)
+      WRITE(6,1) (XPM(i),i=3,kp)
+      WRITE(8,1) (XPM(i),i=3,kp)
+  1   FORMAT(3X, 'betta=',f7.5,'   om=',f7.4, '   Gr='
+     * ,f7.2, '   Pr=',f7.3,3x,'Prd=',f9.4/3x,'eps=',f8.5)
       endif
       if(ip1.eq.1) then
-      WRITE(*,1) (XPM(i),i=2,kp)
+      WRITE(*,1) (XPM(i),i=3,kp)
       endif
       if(ip.eq.1) then
-      WRITE(4,1) (XPM(i),i=2,kp)
+      WRITE(4,1) (XPM(i),i=3,kp)
       endif
       return
       end

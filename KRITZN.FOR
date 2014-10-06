@@ -45,7 +45,7 @@ c new
 c      fname4='test.txt'
 c      open(7,access="append",file=fname4)	 
 
-      fname5='clgr.txt'
+      fname5='grcl.txt'
       open(8,access="append",file=fname5) 
 
       iip=0
@@ -102,7 +102,7 @@ c	  alison
 	  
       call pechpar(xpm,kp,1,0)
       write(3,32) (xpm(i), i=3,8)
-   32 format('[',f7.5,', ',f7.4,', ',f7.2,', ',f7.3,', ',f9.4,', ',f7.5,
+   32 format('[',f7.5,', ',f7.4,', ',f7.2,', ',f7.3,', ',f9.4,', ',f8.5,
      *'],')
 
       write(8,12) (xpm(i), i=3,5)
