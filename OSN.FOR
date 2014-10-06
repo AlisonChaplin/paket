@@ -96,7 +96,7 @@ c создается файл данных
 c      write(*,'(a)') '  Введите имя файла данных:'
 c      read(*,'(a)') fname
       if(lz.eq.0) fname='krit.dat'
-      if(lz.eq.1) fname='yrv.dat'
+      if(lz.eq.1) fname='alf0.dat'
       write(*,76) fname
   76  format(3x,'Имя файла данных:',a)
       endif
