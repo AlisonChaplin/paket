@@ -121,7 +121,7 @@ c      read(*,'(a)') fname3
       endif
 	  
       fname5='rez1cl.txt'
-      open(8,access="append",file=fname5)  
+      open(9,access="append",file=fname5)  
 	  
       kv=4
       PRMT(30)=ipp
@@ -142,7 +142,7 @@ c      PRMT(18)=h1
       call pechpar(xpm,kp,1,0)
       WRITE(6,8) IX1,IX2
       WRITE(6,3) 
-      WRITE(8,3)
+      WRITE(9,3)
       if(ipri.eq.10) then
       WRITE(*,9) prmt(3)
       call pechpar(xpm,kp,1,1)
@@ -171,7 +171,7 @@ c      read *,(ig(k),k=1,kk)
       do 4 k=1,np
       open(6,access="append",file=fname)
       open(4,access="append",file=fname1)
-      open(8,access="append",file=fname5)
+      open(9,access="append",file=fname5)
       if(igr.eq.1)  open(3,access="append",file=fname2)
       if(igr1.eq.1)  open(7,access="append",file=fname3)
       if(ipt.eq.0) then
@@ -184,6 +184,9 @@ c      read *,(ig(k),k=1,kk)
    12 format('[',5(e12.5,', '),'],')
       endif 
       call pechpar(xpm,kp,1,0)
+      WRITE(9,30) (XPM(i),i=3,kp)
+  30  FORMAT(3X, 'betta=',f7.5,'   om=',f7.4, '   Gr='
+     * ,f7.2, '   Pr=',f7.3,3x,'Prd=',f9.4/3x,'eps=',f8.5)	  
       prmt(4)=ipech
    17 do i=1,kkoef
       ca(i)=dcmplx(0.0,0.0)
@@ -249,7 +252,7 @@ c заполнять эти ячейки обязательно
       if(ipri.eq.10) write(*,1) i,ca(i)
       write(6,1) i,ca(i)
       if(igr1.eq.1) write(7,1) i,ca(i)
-      write(8,1) i,ca(i)
+      write(9,1) i,ca(i)
       enddo
       if(igr1.eq.1) write(7,3)
    1  format(5x,i2,'  коэффициент =',e12.5,'+i(',e12.5,')')
@@ -257,11 +260,11 @@ c заполнять эти ячейки обязательно
       enddo
       call analise(kkoef,cal,ca,nkoef)
       WRITE(6,3)
-      WRITE(8,3)
+      WRITE(9,3)
 *      write(*,15)
       close(6)
       close(4)
-      close(8)
+      close(9)
 *  15  format(5x,'Если надо прекратить счет введите 1')
 *      read *,ii
       write(*,3)
@@ -273,7 +276,7 @@ c заполнять эти ячейки обязательно
   20  format('у массива ',i3,'  элементов')
       close(3)
       close(7)
-      close(8)
+      close(9)
       endif 
       stop
       endif

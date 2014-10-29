@@ -48,25 +48,25 @@ c==============================================================
       if(r.lt.0) then
       write(6,1) i 
       write(*,1) i
-      write(8,1) i	  
+      write(9,1) i	  
    1  format(3x,'Ответвление режима ',i2,' происходит в сверхкритиче',
      *'скую область.')
       else
       write(6,2) i
       write(*,2) i
-      write(8,2) i
+      write(9,2) i
    2  format(3x,'Ответвление режима ',i2,' происходит в докритическую',
      *' область и он неустойчив.')
       endif
       if(r.lt.0) then
       if((r1.lt.0).and.(r2.gt.0).and.(r3.gt.0).and.(r0.gt.0)) then 
       write(6,3)
-      write(8,3) 	  
+      write(9,3) 	  
       write(*,3) 
    3  format(3x,'Этот режим устойчив. ')
       else
       write(6,4) 
-      write(8,4) 
+      write(9,4) 
       write(*,4) 
    4  format(3x,'Этот режим неустойчив. ')
       endif
